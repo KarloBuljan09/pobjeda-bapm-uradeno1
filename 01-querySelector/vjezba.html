@@ -32,14 +32,6 @@
         <h3>Zadatak 1 — querySelector (2 boda)</h3>
         <p id="z1tekst">Ovaj tekst treba biti promijenjen.</p>
         <p id="z1info">Ovdje napiši svoje ime i razred.</p>
-        <!--
-            U scriptu ispod:
-            a) Dohvati element #z1tekst i promijeni tekst na:
-               "querySelector radi! ✓"
-
-            b) Dohvati element #z1info i promijeni tekst na:
-               "Ime: [tvoje ime] | Razred: [tvoj razred]"
-        -->
     </div>
 
     <!-- ZADATAK 2 -->
@@ -50,15 +42,6 @@
             <li class="stavka">Stavka dva</li>
             <li class="stavka">Stavka tri</li>
         </ul>
-        <!--
-            Dohvati SVE elemente s klasom "stavka"
-            i petljom promijeni svaki na:
-            "✓ [originalni tekst]"
-
-            Npr. "Stavka jedan" postaje "✓ Stavka jedan"
-
-            (hint: querySelectorAll + for...of petlja)
-        -->
     </div>
 
     <!-- ZADATAK 3 -->
@@ -68,53 +51,70 @@
         <button id="z3uspjeh">Zelena (uspjeh)</button>
         <button id="z3greska">Crvena (greška)</button>
         <button id="z3reset">Reset</button>
-        <!--
-            "Zelena" gumb → ukloni "greska-stil", dodaj "uspjeh-stil" na #z3poruka
-            "Crvena" gumb → ukloni "uspjeh-stil", dodaj "greska-stil"
-            "Reset" gumb  → ukloni obje klase
-        -->
     </div>
 
     <!-- ZADATAK 4 -->
     <div class="zadatak">
         <h3>Zadatak 4 — classList toggle (3 boda)</h3>
         <button id="z4temaGumb">🌙 Tamni način</button>
-        <!--
-            Svaki klik na gumb:
-            → toggle klase "tamno" na document.body
-            → ako je tamno → tekst gumba: "☀️ Svijetli način"
-            → ako je svijetlo → tekst gumba: "🌙 Tamni način"
-
-            (hint: classList.contains za provjeru stanja)
-        -->
     </div>
 
     <script>
         // =============================================
         // ZADATAK 1
         // =============================================
-//prvo rješenje otkomentirajte ga
-     // const z1tekst = document.querySelector("#z1tekst");
-       // z1tekst.textContent = "querySelector radi! ✓";
+        const z1tekst = document.querySelector("#z1tekst");
+        z1tekst.textContent = "querySelector radi! ✓";
+
+        const z1info = document.querySelector("#z1info");
+        z1info.textContent = "Ime: Ivan Horvat | Razred: 2B";
 
         // =============================================
         // ZADATAK 2
         // =============================================
+        const sveStavke = document.querySelectorAll(".stavka");
 
+        for (const stavka of sveStavke) {
+            stavka.textContent = "✓ " + stavka.textContent;
+        }
 
         // =============================================
         // ZADATAK 3
         // =============================================
+        const z3poruka = document.querySelector("#z3poruka");
+        const z3uspjeh = document.querySelector("#z3uspjeh");
+        const z3greska = document.querySelector("#z3greska");
+        const z3reset = document.querySelector("#z3reset");
 
+        z3uspjeh.addEventListener("click", () => {
+            z3poruka.classList.remove("greska-stil");
+            z3poruka.classList.add("uspjeh-stil");
+        });
+
+        z3greska.addEventListener("click", () => {
+            z3poruka.classList.remove("uspjeh-stil");
+            z3poruka.classList.add("greska-stil");
+        });
+
+        z3reset.addEventListener("click", () => {
+            z3poruka.classList.remove("uspjeh-stil");
+            z3poruka.classList.remove("greska-stil");
+        });
 
         // =============================================
         // ZADATAK 4
         // =============================================
+        const z4temaGumb = document.querySelector("#z4temaGumb");
 
+        z4temaGumb.addEventListener("click", () => {
+            document.body.classList.toggle("tamno");
 
-        // =============================================
-        // Otvori konzolu F12 — ne smije biti grešaka!
-        // =============================================
+            if (document.body.classList.contains("tamno")) {
+                z4temaGumb.textContent = "☀️ Svijetli način";
+            } else {
+                z4temaGumb.textContent = "🌙 Tamni način";
+            }
+        });
     </script>
 </body>
 </html>
